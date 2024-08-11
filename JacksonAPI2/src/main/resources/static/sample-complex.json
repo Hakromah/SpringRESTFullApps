@@ -1,0 +1,30 @@
+{
+  "id": 45,
+  "name": "Amara",
+  "city": "Conakry",
+  "country": "Guinea",
+  "phone": 123456789,
+  "friends": [
+    {
+      "id": 44,
+      "name": "Omar",
+      "city": "Conakry",
+      "country": "Guinea",
+      "phone": 123456789
+    },
+    {
+      "id": 46,
+      "name": "Ayouba",
+      "city": "Freetown",
+      "country": "Sierra Leone",
+      "phone": 123455642
+    },
+    {
+      "id": 47,
+      "name": "Fatumata",
+      "city": "Monrovia",
+      "country": "Liberia",
+      "phone": 58496654
+    }
+  ]
+}
