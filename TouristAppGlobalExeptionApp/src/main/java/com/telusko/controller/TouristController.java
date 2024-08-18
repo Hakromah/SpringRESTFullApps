@@ -1,6 +1,5 @@
 package com.telusko.controller;
 
-import com.telusko.exceptions.TouristNotFoundException;
 import com.telusko.model.Tourist;
 import com.telusko.service.ITouristService;
 import org.springframework.beans.factory.annotation.Autowired;
