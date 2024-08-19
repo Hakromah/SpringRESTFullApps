@@ -45,7 +45,6 @@ public class TouristController {
 
     @PutMapping("/updateTourist")
     public ResponseEntity<?> updateTouristInfo(@RequestBody Tourist tourist) {
-
         String status = service.updateTouristData(tourist);
         return new ResponseEntity<>(status, HttpStatus.OK);
     }
