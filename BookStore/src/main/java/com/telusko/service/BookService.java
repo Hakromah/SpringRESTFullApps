@@ -54,7 +54,7 @@ public class BookService implements IBookService {
 
         if (optional.isPresent()) {
             Book book = optional.get();
-            book.setBPrice(price);
+            book.setPrice(price);
             bRepo.save(book);
             return "Book with Id: " + id + " updated";
         } else {

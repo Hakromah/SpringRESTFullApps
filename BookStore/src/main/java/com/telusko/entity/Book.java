@@ -20,8 +20,8 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private String bName;
-    private String bAuthor;
-    private Double bPrice;
+    private String name;
+    private String author;
+    private Double price;
     private String year;
 }

@@ -6,14 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/api")
 public class BookController {
 
@@ -25,7 +22,7 @@ public class BookController {
     }
 
     @PostMapping(("/register"))
-    ResponseEntity<String> addBookInfo(Book book) {
+    ResponseEntity<String> addBookInfo(@RequestBody Book book) {
 
         String status = service.registerBook(book);
         return new ResponseEntity<String>(status, HttpStatus.CREATED);
@@ -43,22 +40,22 @@ public class BookController {
         return new ResponseEntity<>(book, HttpStatus.OK);
     }
 
-    @PostMapping("/updatebook")
-    ResponseEntity<?> updateBookData(Book book) {
+    @PutMapping("/updatebook")
+    ResponseEntity<?> updateBookData(@RequestBody Book book) {
         String status = service.updateBookData(book);
         return new ResponseEntity<String>(status, HttpStatus.OK);
     }
 
-    @PostMapping("/updatebook/{id}/{price}")
+    @PutMapping("/updatebook/{id}/{price}")
     ResponseEntity<?> updateBookDataById(@PathVariable("id") Integer id, @PathVariable("price") Double price) {
         String status = service.updateBookDataById(id, price);
         return new ResponseEntity<String>(status, HttpStatus.OK);
     }
 
-    @PostMapping("/deletebook/{id}")
+    @DeleteMapping("/deletebook/{id}")
     ResponseEntity<?> deleteBookInfo(@PathVariable("id") Integer id) {
         String status = service.deleteBook(id);
-        return new ResponseEntity<String>(status, HttpStatus.OK);
+        return new ResponseEntity<>(status, HttpStatus.OK);
     }
 
 }
