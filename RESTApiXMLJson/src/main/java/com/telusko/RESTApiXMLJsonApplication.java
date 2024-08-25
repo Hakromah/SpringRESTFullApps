@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class RestApi1Application {
+public class RESTApiXMLJsonApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(RestApi1Application.class, args);
+        SpringApplication.run(RESTApiXMLJsonApplication.class, args);
     }
 
 }
