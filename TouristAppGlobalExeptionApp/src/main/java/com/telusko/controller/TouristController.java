@@ -29,7 +29,6 @@ public class TouristController {
 
     @GetMapping("/getalltourist")
     public ResponseEntity<?> getTouristInfo() {
-
         List<Tourist> status = service.fetchAllTourist();
         return new ResponseEntity<>(status, HttpStatus.OK);
     }

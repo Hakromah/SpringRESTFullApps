@@ -25,4 +25,11 @@ public class GreetingService implements IGreetingService {
 
         return response;
     }
+
+    @Override
+    public Boolean acceptTourist(Tourist tourist) {
+        String msg = "Welcome to our Tourist site " + tourist.getName();
+        System.out.println(msg);
+        return true;
+    }
 }
