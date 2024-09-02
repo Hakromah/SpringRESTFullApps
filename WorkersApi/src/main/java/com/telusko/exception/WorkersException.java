@@ -1,8 +1,8 @@
 package com.telusko.exception;
 
-public class BookStoreException extends RuntimeException {
+public class WorkersException extends RuntimeException {
 
-    public BookStoreException(String msg) {
+    public WorkersException(String msg) {
         super(msg);
     }
 }
