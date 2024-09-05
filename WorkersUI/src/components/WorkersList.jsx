@@ -24,19 +24,26 @@ const WorkersList = () => {
 	};
 
 	return (
-		<div className="flex p-5 bg-red-700">
-			<h2 className="bg-red-300">Workers List</h2>
-			<Link to="/addWorker">Add New Worker</Link>
-			<ul>
+		<div className="flex p-5 flex-col justify-center items-center">
+			<h2 className="text-2xl text-teal-500 font-bold my-4">WORKERS LIST</h2>
+			<Link to="/addWorker" className="text-blue-700 bg-zinc-200 p-2 rounded-md text-xl">Add New Worker</Link>
+			<ul className="text-left">
 				{workers.map((worker) => (
-					<li key={worker.id}>
-						<Link to={`/worker/${worker.id}`}>
+					<li key={worker.id} className="flex items-center">
+						<Link className="text-blue-700" to={`/worker/${worker.id}`}>
 							{worker.name} - {worker.specialization}
 						</Link>
-						<button onClick={() => handleDelete(worker.id)}>
-							Delete
-						</button>
-						<Link to={`/editWorker/${worker.id}`}>Edit</Link>
+						<span className="text-red-700 text-xl ml-2 bg-red-100 font-bold px-2 pb-1">
+							<button onClick={() => handleDelete(worker.id)}>
+								Delete
+							</button>
+						</span>
+						<Link
+							to={`/editWorker/${worker.id}`}
+							className="text-xl m-3 bg-green-400 px-2 text-yellow-300 font-bold"
+						>
+							Edit
+						</Link>
 					</li>
 				))}
 			</ul>
