@@ -1,0 +1,30 @@
+version: "3.8"
+services:
+    app:
+        build: .
+        ports:
+            - "8080:8080"
+        networks:
+            - s-network
+
+    postgres:
+        image: postgres:latest
+        environment:
+            POSTGRES_USER: hassan
+            POSTGRES_PASSWORD: 1234
+            POSTGRES_DB: dockerdbapp
+            POSTGRES_PORT: 5431
+        ports:
+            - "5432:5432"
+        networks:
+            - s-network
+        volumes:
+            - postgres-st-data:/var/lib/postgresql/data
+
+
+networks:
+    s-network:
+        driver: bridge
+volumes:
+    postgres-st-data:
+
