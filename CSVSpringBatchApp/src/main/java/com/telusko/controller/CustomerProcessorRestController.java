@@ -52,6 +52,13 @@ public class CustomerProcessorRestController {
         return new ResponseEntity<>(status, HttpStatus.OK);
     }
 
+    @GetMapping("/getcustomer/{id}")
+    @Operation(summary = "Get method to get single customer", description = "This method is used to fetch a single customer")
+    ResponseEntity<?> fetchCustomerById(@PathVariable("id") Integer id) {
+        Customer customer = service.getCustomerById(id);
+        return new ResponseEntity<>(customer, HttpStatus.OK);
+    }
+
     @DeleteMapping("/deletecustomer/{id}")
     @Operation(summary = "Delete method to delete customer", description = "This method is used to delete a single customer")
     ResponseEntity<?> deleteCustomer(@PathVariable("id") Integer id) {
@@ -69,5 +76,4 @@ public class CustomerProcessorRestController {
         service.updateCustomer(customer, id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 }

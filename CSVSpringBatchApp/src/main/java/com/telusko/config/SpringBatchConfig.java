@@ -28,8 +28,6 @@ public class SpringBatchConfig {
     @Autowired
     private ICustomerRepository repo;
 
-//    @Autowired
-//    private DataSourceTransactionManager transactionManager;
 
     @Autowired
     private PlatformTransactionManager transactionManager;
