@@ -17,4 +17,8 @@ public class KafkaService {
         kafkaTemplate.send(AppConstants.TOPIC_NAME, student);
         return "Message sent to Kafka successfully";
     }
+
+//    public Student receiveMessage() {
+//        return new Student();
+//    }
 }

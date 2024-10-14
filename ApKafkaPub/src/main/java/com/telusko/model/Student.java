@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+//@Data
 public class Student {
     private Integer id;
     private String name;
@@ -14,3 +14,4 @@ public class Student {
     private String city;
 
 }
+
