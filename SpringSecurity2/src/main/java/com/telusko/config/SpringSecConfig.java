@@ -1,7 +1,5 @@
 package com.telusko.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.proxy.NoOp;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -10,18 +8,22 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
 public class SpringSecConfig {
 
-    private UserDetailsService userDetailsService;
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(12);
+    }
+
+    private final UserDetailsService userDetailsService;
 
     public SpringSecConfig(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
@@ -53,7 +55,8 @@ public class SpringSecConfig {
 
         DaoAuthenticationProvider daoProvider = new DaoAuthenticationProvider();
         daoProvider.setUserDetailsService(userDetailsService);
-        daoProvider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
+        daoProvider.setPasswordEncoder(new BCryptPasswordEncoder(12));
+        //daoProvider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
 
         return daoProvider;
     }
