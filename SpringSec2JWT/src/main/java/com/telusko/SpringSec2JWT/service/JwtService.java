@@ -1,10 +1,12 @@
 package com.telusko.SpringSec2JWT.service;
 
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.KeyGenerator;
@@ -15,6 +17,7 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 @Service
 public class JwtService {
@@ -44,13 +47,50 @@ public class JwtService {
                 .setSubject(name)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 18000000))
-                .signWith(getToken(), SignatureAlgorithm.HS256)
+                .signWith(getKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
-    private Key getToken() {
+    private Key getKey() {
         byte[] b = Decoders.BASE64.decode(secretKey);
         return Keys.hmacShaKeyFor(b);
+    }
+
+    //TO EXTRACT THE PAYLOAD (DATA) FROM THE JWT TOKEN
+    public String extractUserName(String token) {
+        // extract the username from jwt token
+        return extractClaim(token, Claims::getSubject);
+    }
+
+    private <T> T extractClaim(String token, Function<Claims, T> claimResolver) {
+        System.out.println("Token in extract claim " + token);
+        final Claims claims = extractAllClaims(token);
+        System.out.println("Claims " + claims);
+        return claimResolver.apply(claims);
+    }
+
+    private Claims extractAllClaims(String token) {
+        System.out.println("Token is exacrt all claims " + token);
+        return Jwts.parserBuilder()
+                .setSigningKey((getKey()))
+                .build().parseClaimsJws(token).getBody();
+    }
+
+    public boolean validateToken(String token, UserDetails userDetails) {
+        System.out.println("token in validate token " + token);
+        final String userName = extractUserName(token);
+
+        System.out.println("validate Token " + token);
+        return (userName.equals(userDetails.getUsername()) && !isTokenExpired(token));
+    }
+
+    private boolean isTokenExpired(String token) {
+        System.out.println("Token is ex");
+        return extractExpiration(token).before(new Date());
+    }
+
+    private Date extractExpiration(String token) {
+        return extractClaim(token, Claims::getExpiration);
     }
 
 

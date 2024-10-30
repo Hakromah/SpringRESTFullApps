@@ -30,7 +30,6 @@ public class UserController {
     @PostMapping("/adduser")
     public User register(@RequestBody User user) {
         System.out.println(user);
-
         user.setPassword(bcrypt.encode(user.getPassword()));
         return service.registerUser(user);
     }
@@ -40,11 +39,9 @@ public class UserController {
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(user.getName(), user.getPassword()));
         if (authentication.isAuthenticated()) {
-
             return jwtService.createToken(user.getName());
         } else {
             return "Invalid credentials";
         }
     }
-
 }

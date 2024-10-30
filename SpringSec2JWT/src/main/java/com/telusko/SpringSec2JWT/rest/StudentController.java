@@ -14,28 +14,24 @@ import com.telusko.SpringSec2JWT.model.Student;
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
-public class StudentController 
-{
-	
-	List<Student> students=new ArrayList<>(List.of(new Student(1, "Rohan", "Java"),
-			new Student(2, "Harsh", "SpringBoot") ));
-	
-	@GetMapping("/getstudents")
-	public List<Student> getStudents()
-	{
-		return students;
-	}
-	
-	@GetMapping("/csrftoken")
-	public CsrfToken getCsrfToken(HttpServletRequest request)
-	{
-		return (CsrfToken) request.getAttribute("_csrf");
-	}
-	
-	@PostMapping("/addstudent")
-	public void addStudents(@RequestBody Student stu)
-	{
-		students.add(stu);
-	}
+public class StudentController {
+
+    List<Student> students = new ArrayList<>(List.of(new Student(1, "Rohan", "Java"),
+            new Student(2, "Harsh", "SpringBoot")));
+
+    @GetMapping("/getstudents")
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    @GetMapping("/csrftoken")
+    public CsrfToken getCsrfToken(HttpServletRequest request) {
+        return (CsrfToken) request.getAttribute("_csrf");
+    }
+
+    @PostMapping("/addstudent")
+    public void addStudents(@RequestBody Student stu) {
+        students.add(stu);
+    }
 
 }
